@@ -1,0 +1,2 @@
+# Packages required in a devstack environment
+-r production.txt

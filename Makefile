@@ -36,24 +36,11 @@ docs: ## generate Sphinx HTML documentation, including API docs
 	tox -e docs
 	$(BROWSER) docs/_build/html/index.html
 
-upgrade: ## update the requirements/*.txt files with the latest packages satisfying requirements/*.in
-	pip install -q pip-tools
-	pip-compile --upgrade -o requirements/base.txt requirements/base.in
-	pip-compile --upgrade -o requirements/dev.txt requirements/dev.in requirements/quality.in
-	pip-compile --upgrade -o requirements/doc.txt requirements/base.in requirements/doc.in
-	pip-compile --upgrade -o requirements/quality.txt requirements/quality.in
-	pip-compile --upgrade -o requirements/test.txt requirements/base.in requirements/test.in
-	pip-compile --upgrade -o requirements/travis.txt requirements/travis.in
-	# Let tox control the Django version for tests
-	sed '/Django==/d' requirements/test.txt > requirements/test.tmp
-	mv requirements/test.tmp requirements/test.txt
-
 quality: ## check coding style with pycodestyle and pylint
 	tox -e quality
 
 requirements: ## install development environment requirements
-	pip install -qr requirements/dev.txt --exists-action w
-	pip-sync requirements/base.txt requirements/dev.txt requirements/private.* requirements/test.txt
+	pip install -qr requirements/devstack.txt --exists-action w
 
 test: clean ## run tests in the current virtualenv
 	py.test
@@ -66,29 +53,3 @@ test-all: ## run tests on every supported Python/Django combination
 	tox
 
 validate: quality test ## run tests and quality checks
-
-## Localization targets
-
-extract_translations: ## extract strings to be translated, outputting .mo files
-	rm -rf docs/_build
-	cd edx-salesforce && ../manage.py makemessages -l en -v1 -d django
-	cd edx-salesforce && ../manage.py makemessages -l en -v1 -d djangojs
-
-compile_translations: ## compile translation files, outputting .po files for each supported language
-	cd edx-salesforce && ../manage.py compilemessages
-
-detect_changed_source_translations:
-	cd edx-salesforce && i18n_tool changed
-
-pull_translations: ## pull translations from Transifex
-	tx pull -af
-
-push_translations: ## push source translation files (.po) from Transifex
-	tx push -s
-
-dummy_translations: ## generate dummy translation (.po) files
-	cd edx_salesforce && i18n_tool dummy
-
-build_dummy_translations: extract_translations dummy_translations compile_translations ## generate and compile dummy translation files
-
-validate_translations: build_dummy_translations detect_changed_source_translations ## validate translations

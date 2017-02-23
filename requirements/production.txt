@@ -1,0 +1,5 @@
+# Packages required in a production environment
+-r base.txt
+
+MySQL-python==1.2.5
+PyYAML==3.12
