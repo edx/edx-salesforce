@@ -14,10 +14,10 @@ Contents:
 
    readme
    getting_started
-   modules
    testing
-   internationalization
-   changelog
+   configuration
+   sync_salesforce
+   modules
 
 
 Indices and tables

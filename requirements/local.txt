@@ -1,0 +1,5 @@
+# Packages required for local development
+-r test.txt
+-r docs.txt
+
+MySQL-python==1.2.5

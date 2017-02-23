@@ -7,36 +7,38 @@ Django applications, so these settings will not be used.
 
 from __future__ import absolute_import, unicode_literals
 
-from os.path import abspath, dirname, join
+from settings.base import *
 
 
-def root(*args):
-    """
-    Get the absolute path of the given path relative to the project root.
-    """
-    return join(abspath(dirname(__file__)), *args)
-
+DEBUG = True
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'default.db',
+        'NAME': ':memory:',
         'USER': '',
         'PASSWORD': '',
         'HOST': '',
         'PORT': '',
-    }
+    },
+    'ecommerce': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': ':memory:',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
+    },
 }
 
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'edx_salesforce',
+    'salesforce',
 )
 
-LOCALE_PATHS = [
-    root('edx_salesforce', 'conf', 'locale'),
-]
+LOGGING = {}
 
 ROOT_URLCONF = 'edx_salesforce.urls'
 

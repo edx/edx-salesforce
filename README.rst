@@ -1,5 +1,5 @@
 edx-salesforce
-=============================
+==============
 
 .. image:: https://img.shields.io/pypi/v/edx-salesforce.svg
     :target: https://pypi.python.org/pypi/edx-salesforce/
@@ -27,9 +27,18 @@ edx-salesforce
 
 Django application used to integrate Open EdX with Salesforce.
 
-Overview (please modify)
-------------------------
+Overview
+--------
 
+This Django application uses the django-salesforce_ package to provide a
+Django ORM for communicating with the Salesforce API to CRUD Salesforce
+objects.
+
+The application provides the sync_salesforce Django command which will
+query the databases that store Open EdX data related to user profiles
+and course purchases and then create or update objects in Salesforce.
+
+.. _django-salesforce: https://github.com/django-salesforce/django-salesforce
 
 Documentation
 -------------

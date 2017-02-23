@@ -3,8 +3,9 @@ branch = True
 data_file = .coverage
 source=edx_salesforce
 omit =
-    test_settings
     *migrations*
     *admin.py
     *static*
     *templates*
+    *tests*
+    *urls.py

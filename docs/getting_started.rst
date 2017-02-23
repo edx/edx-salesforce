@@ -1,8 +1,11 @@
+.. _getting_started:
+
 Getting Started
 ===============
 
-If you have not already done so, create/activate a `virtualenv`_. Unless otherwise stated, assume all terminal code
-below is executed within the virtualenv.
+If you have not already done so, create/activate a `virtualenv`_.
+Unless otherwise stated, assume all terminal code below is executed
+within the virtualenv.
 
 .. _virtualenv: https://virtualenvwrapper.readthedocs.org/en/latest/
 
