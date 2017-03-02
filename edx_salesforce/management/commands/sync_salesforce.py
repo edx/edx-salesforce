@@ -1,5 +1,6 @@
 from django.core.management.base import BaseCommand, CommandError
-from django.db import connections
+
+from edx_salesforce.edx_data import fetch_user_data
 
 
 class Command(BaseCommand):
@@ -34,9 +35,4 @@ class Command(BaseCommand):
             orgs=','.join(orgs)
         ))
 
-        with connections['default'].cursor() as cursor:
-            # cursor.execute()
-            self.stdout.write('edxapp query')
-        with connections['ecommerce'].cursor() as cursor:
-            # cursor.execute()
-            self.stdout.write('ecommerce query')
+        data = fetch_user_data(site_domain, orgs)
