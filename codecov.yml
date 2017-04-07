@@ -1,3 +1,4 @@
+comment: off
 coverage:
   status:
     project:
@@ -8,5 +9,3 @@ coverage:
       default:
         enabled: yes
         target: 100%
-
-comment: false
