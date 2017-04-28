@@ -1,0 +1,4 @@
+doc8
+edx_sphinx_theme
+Sphinx
+sphinxcontrib-napoleon    # Google Style docstring support for sphinx

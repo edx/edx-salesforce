@@ -1,0 +1,14 @@
+# Packages required for testing
+-r base.txt
+
+caniusepython3
+codecov
+coverage
+ddt
+django-dynamic-fixture
+django-nose
+mock
+nose-ignore-docstring
+pep8
+
+edx-lint

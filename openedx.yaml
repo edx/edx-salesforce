@@ -1,7 +1,7 @@
 # openedx.yaml
 
 ---
-owner: edx/solutions
+owner: edx/business
 nick: edx-salesforce
 tags:
     - tools

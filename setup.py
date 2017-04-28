@@ -32,13 +32,12 @@ if sys.argv[-1] == 'tag':
     sys.exit()
 
 README = open(os.path.join(os.path.dirname(__file__), 'README.rst')).read()
-CHANGELOG = open(os.path.join(os.path.dirname(__file__), 'CHANGELOG.rst')).read()
 
 setup(
     name='edx-salesforce',
     version=VERSION,
     description="""Django application used to integrate Open EdX with Salesforce.""",
-    long_description=README + '\n\n' + CHANGELOG,
+    long_description=README,
     author='edX',
     author_email='oscm@edx.org',
     url='https://github.com/edx/edx-salesforce',
