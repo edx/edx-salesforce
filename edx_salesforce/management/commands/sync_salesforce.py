@@ -80,6 +80,18 @@ class Command(BaseCommand):
             )
             return
 
+        status_count = self._sync_user_data(users, site_domain, orgs)
+
+        # Output sync status summary
+        for status, count in status_count.items():
+            self.stdout.write('{count} {status}'.format(count=count, status=status))
+
+    def _sync_user_data(self, users, site_domain, orgs):
+        """
+        Synchronizes the provided user data with the configured Salesforce account.
+        Returns a dictionary containing the count of how many user synchronizations
+        produced each sync status (for logging purposes).
+        """
         total_users = len(users)
         pluralize_total_users = '' if total_users == 1 else 's'
         org_count = len(orgs)
@@ -113,10 +125,16 @@ class Command(BaseCommand):
                 try:
                     lead = Lead.objects.get(username=username)
                     if lead.is_converted:
+                        contact = None
                         try:
-                            salesforce_updated = self._update_lead_or_contact(lead.converted_contact, user)
+                            contact = lead.converted_contact
                         except Contact.DoesNotExist:
-                            # Converted contact was manually deleted in Salesforce
+                            # Converted contact must have been manually deleted in Salesforce
+                            pass
+
+                        if contact:
+                            salesforce_updated = self._update_lead_or_contact(lead.converted_contact, user)
+                        else:
                             self.stdout.write(
                                 '{user}: Converted Contact object manually deleted in Salesforce. '
                                 'This user will no longer be synchronized.'.format(
@@ -172,9 +190,7 @@ class Command(BaseCommand):
             )
         )
 
-        # Output sync status summary
-        for status, count in status_count.items():
-            self.stdout.write('{count} {status}'.format(count=count, status=status))
+        return status_count
 
     def _convert_lead(self, lead):
         """
