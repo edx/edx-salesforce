@@ -33,7 +33,7 @@ local-requirements:
 	pip install -qr requirements/local.txt --exists-action w
 
 requirements:
-	pip install -qr requirements.txt --exists-action w
+	pip install -qr requirements/production.txt --exists-action w
 
 test: clean
 	coverage run ./manage.py test edx_salesforce --settings=settings.test
